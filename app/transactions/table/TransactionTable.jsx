@@ -1,6 +1,6 @@
 import TransactionRow from "./TableRow";
 
-const TransactionTable = ({ transactions, TABLE_HEADERS }) => (
+const TransactionTable = ({ transactions, TABLE_HEADERS, isRecurring }) => (
   <table className="divide-y-[1px] divide-grey-100 table-auto w-full mb-4">
     <thead className="text-left">
       <tr>
@@ -16,6 +16,7 @@ const TransactionTable = ({ transactions, TABLE_HEADERS }) => (
         <TransactionRow
           key={`${transaction.name}-${index}`}
           transaction={transaction}
+          isRecurring={isRecurring}
         />
       ))}
     </tbody>
