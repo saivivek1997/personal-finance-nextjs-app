@@ -1,57 +1,12 @@
 "use client";
-
-import { financeData } from "@/data/data";
 import Image from "next/image";
 import React from "react";
 import RecurringTable from "./RecurringTable.";
+import useRecurringBillsData from "@/hooks/useRecurringBillsData";
 
 function RecurringBillsPage() {
-  const recurringBills = financeData.transactions.filter(
-    (trans) => trans.recurring
-  );
-  const requiredDate = new Date(financeData.transactions[0].date).getDate();
-  const newMaxDate = requiredDate + 5;
-
-  const paid = recurringBills
-    .filter((trans) => {
-      return new Date(trans.date).getMonth() === 7;
-    })
-    .map((trans) => ({ ...trans, isPaid: true }));
-
-  const dueSoon = recurringBills
-    .filter((trans) => {
-      return (
-        new Date(trans.date).getDate() >= requiredDate &&
-        new Date(trans.date).getDate() <= newMaxDate &&
-        new Date(trans.date).getMonth() === 6
-      );
-    })
-    .map((trans) => ({ ...trans, isDueSoon: true }));
-
-  const upcoming = recurringBills
-    .filter((trans) => {
-      const transactionDate = new Date(trans.date);
-      return (
-        transactionDate.getMonth() === 6 &&
-        transactionDate.getDate() > newMaxDate
-      );
-    })
-    .map((trans) => ({ ...trans, isUpcoming: true }));
-
-  const recurringTotalCounts = {
-    paid: paid.reduce((acc, curr) => Math.abs(acc) + Math.abs(curr.amount), 0),
-    paidCount: paid.length,
-    dueSoon: dueSoon.reduce(
-      (acc, curr) => Math.abs(acc) + Math.abs(curr.amount),
-      0
-    ),
-    dueSoonCount: dueSoon.length,
-    upcoming: upcoming.reduce(
-      (acc, curr) => Math.abs(acc) + Math.abs(curr.amount),
-      0
-    ),
-    upcomingCount: upcoming.length,
-  };
+  const { recurringTotalCounts, paid, upcoming, dueSoon } =
+    useRecurringBillsData();
 
   return (
     <div className="bg-beige-100 min-h-screen p-4 ">

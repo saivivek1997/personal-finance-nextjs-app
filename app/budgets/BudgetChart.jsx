@@ -14,7 +14,7 @@ const DoughnutChart = () => {
     {
       spentMoney: 0,
       maximum: 0,
-    },
+    }
   );
 
   const chartRef = useRef(null);
