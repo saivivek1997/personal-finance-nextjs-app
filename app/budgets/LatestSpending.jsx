@@ -48,7 +48,7 @@ function LatestSpending({ category, id }) {
               <div className="flex justify-between p-2" key={index}>
                 <div className="flex gap-2 items-center">
                   <Avatar img={avatar} />
-                  <p>{name}</p>
+                  <p className="text-xs md:text-base">{name}</p>
                 </div>
 
                 <div className="space-y-1">

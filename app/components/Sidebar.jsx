@@ -10,7 +10,7 @@ const Sidebar = () => {
     return pathname === path;
   };
   return (
-    <section className="bg-grey-900 min-h-screen min-w-48 rounded-e-2xl">
+    <section className=" hidden   md:block bg-grey-900 min-h-screen min-w-48 rounded-e-2xl ">
       <h1 className="text-[14px] text-white m-6">Finance</h1>
       <div className="space-y-4">
         {sidebarItems.map((item) => (

@@ -11,7 +11,7 @@ export default function CustomModal({ isVisible, onClose, title, children }) {
         onClick={onClose} // Close modal on clicking the background
       ></div>
       {/* Modal Content */}
-      <div className="bg-white rounded-lg shadow-customBoxShadow max-w-md w-full z-10 ">
+      <div className="bg-white rounded-lg shadow-customBoxShadow max-w-sm md:max-w-md w-full z-10 ">
         {/* Header */}
         <div className="flex justify-between items-center pt-4 pb-2 px-6  ">
           <h2 className="text-xl font-semibold">{title}</h2>

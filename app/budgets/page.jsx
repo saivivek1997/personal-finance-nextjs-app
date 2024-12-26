@@ -20,7 +20,7 @@ function BudgetPage() {
   }
 
   return (
-    <div className="bg-beige-100 p-9">
+    <div className="bg-beige-100 p-4 md:p-9">
       <div className="flex justify-between items-center mb-3">
         <h1>Budgets</h1>
         <Button
@@ -33,16 +33,10 @@ function BudgetPage() {
         </Button>
       </div>
       {/*==================================================================*/}
-      <div className=" grid grid-cols-2 gap-4">
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <div className="rounded-xl bg-white p-8 w-full space-y-4">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "50px",
-              }}
-            >
+            <div className="flex   justify-center mt-12">
               <DoughnutChart />
             </div>
             <div className="divide-y-[1px] divide-beige-100">

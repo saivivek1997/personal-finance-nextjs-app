@@ -1,5 +1,4 @@
 "use client";
-
 import { useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
 import React, { useEffect, useMemo } from "react";
@@ -32,7 +31,8 @@ function Home() {
 
   return (
     <div className="bg-beige-100 min-h-screen p-4 ">
-      <div className="grid grid-cols-3 gap-4 mb-3">
+      <h1 className="text-grey-900 text-base mb-2 font-bold">Overview</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
         <div className="bg-grey-900 text-white rounded-xl p-4 space-y-2">
           <p className="text-[14px] font-[400]">Current Balance</p>
           <p className="font-bold text-3xl">${financeData.balance.current}</p>
@@ -51,7 +51,7 @@ function Home() {
         </div>
       </div>
       {/* =============================== */}
-      <div className="flex gap-2">
+      <div className="flex  flex-col md:flex-row gap-2">
         <section className="space-y-2 flex-1 mb-3 ">
           <div className="bg-white rounded-xl p-4 space-y-2 mb-3">
             <div className="flex justify-between">
@@ -72,7 +72,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="flex gap-8 ">
+            <div className="flex flex-col md:flex-row gap-8 ">
               <div className="bg-beige-100 rounded-xl p-4 min-w-48">
                 <div className="flex gap-2 items-center ">
                   <Image
@@ -174,15 +174,9 @@ function Home() {
                 />
               </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "50px",
-              }}
-            >
+            <div className="flex  flex-col md:flex-row justify-center mt-12 items-center">
               <DoughnutChart />
-              <div className="flex flex-col gap-2 ml-4">
+              <div className="grid grid-cols-2  mt-4 gap-4 md:flex md:flex-col md:gap-2 ml-4">
                 {financeData.budgets.map((budget) => (
                   <div className="flex gap-2" key={budget.id}>
                     <div
