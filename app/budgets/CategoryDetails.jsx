@@ -18,7 +18,6 @@ function CategoryDetails({ id, category, maximum, theme }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
   const { budgetData } = useAppSelector((state) => state.finance);
-  console.log(budgetData, "budgetdata");
   const spentMoney = budgetData.find((bdgt) => bdgt.id === id)?.spentMoney;
   const percentage = budgetData.find((bdgt) => bdgt.id === id)?.percentage;
 

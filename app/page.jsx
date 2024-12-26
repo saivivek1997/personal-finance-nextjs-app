@@ -20,7 +20,6 @@ function Home() {
   const {
     recurringTotalCounts: { paid, upcoming, dueSoon },
   } = useRecurringBillsData();
-  console.log({ paid, dueSoon, upcoming });
 
   const router = useRouter();
   const dispatch = useDispatch();

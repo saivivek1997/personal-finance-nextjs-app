@@ -12,7 +12,6 @@ function PotsForm({ isEdit, handleClose, potID }) {
   const { financeData } = useAppSelector((state) => state.finance);
 
   const potsData = financeData.pots.find((pot) => pot.id === potID);
-  console.log(potsData, "potsdata");
 
   const {
     unUsedThemes,

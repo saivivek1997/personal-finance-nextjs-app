@@ -4,7 +4,6 @@ import { getCustomFormat } from "@/utils/customDate";
 import Image from "next/image";
 
 const TransactionRow = ({ transaction, isRecurring }) => {
-  console.log(transaction, "transaction");
   const { name, category, date, amount, avatar, isPaid, isDueSoon } =
     transaction;
   const transactionDate = new Date(date);

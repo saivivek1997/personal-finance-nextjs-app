@@ -8,8 +8,6 @@ import PotsForm from "./PotsForm";
 
 function PotsPage() {
   const { financeData } = useAppSelector((state) => state.finance);
-
-  console.log(financeData, "state");
   const [isModalVisible, setModalVisible] = useState(false);
 
   function handleClose() {
