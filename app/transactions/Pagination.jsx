@@ -15,10 +15,10 @@ function PaginationButton({
   return (
     <button
       className={cn(
-        "rounded-lg border-solid border bg-white border-beige-500 px-3 py-2 flex items-center justify-between   text-[14px] text-grey-900 disabled:cursor-not-allowed",
+        "flex items-center justify-between rounded-lg border border-solid border-beige-500 bg-white px-3 py-2 text-[14px] text-grey-900 disabled:cursor-not-allowed",
         type ? "min-w-fit" : "min-w-24",
         className,
-        isSelected && "bg-grey-900 text-white"
+        isSelected && "bg-grey-900 text-white",
       )}
       onClick={onPaginationChange}
       disabled={disabled}
@@ -46,14 +46,15 @@ function Pagination({
 }) {
   const pageCount = Math.ceil(financeDataLength / 10);
   return (
-    <div className="flex ">
+    <div className="flex items-center md:items-start">
       <PaginationButton
         icon="./assets/icon-caret-left.svg"
         text="Prev"
         onPaginationChange={onPreviousChange}
         disabled={paginationNumber === 1}
+        className="mr-1 h-8 md:h-auto"
       />
-      <div className="mx-auto flex gap-3">
+      <div className="mx-auto flex flex-wrap gap-3 md:flex-nowrap">
         {Array.from(
           { length: Math.ceil(financeDataLength / 10) },
           (_, index) => (
@@ -64,7 +65,7 @@ function Pagination({
               onPaginationChange={() => onPaginationChange(index + 1)}
               isSelected={paginationNumber === index + 1}
             />
-          )
+          ),
         )}
       </div>
 
@@ -74,6 +75,7 @@ function Pagination({
         order
         onPaginationChange={onNextChange}
         disabled={paginationNumber === pageCount}
+        className="h-8 md:h-auto"
       />
     </div>
   );

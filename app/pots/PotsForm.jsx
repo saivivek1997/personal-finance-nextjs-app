@@ -28,7 +28,7 @@ function PotsForm({ isEdit, handleClose, potID }) {
           target: "",
           theme: null,
           total: 0,
-        }
+        },
   );
 
   const dispatch = useAppDispatch();
@@ -49,46 +49,48 @@ function PotsForm({ isEdit, handleClose, potID }) {
             addNewPot({
               ...formDetails,
               id: crypto.randomUUID(),
-            })
+            }),
           );
+          toast.success("Added Pots Successfully", { transition: "Bounce" });
         } else {
           dispatch(editNewPot({ ...formDetails }));
+          toast.success("Edited Pots Successfully", { transition: "Bounce" });
         }
         handleClose();
       }}
       className="space-y-3"
     >
-      <p className="text-grey-500 text-[14px]">
+      <p className="text-[14px] text-grey-500">
         {!isEdit
           ? "Create a pot to set savings targets. These can help keep you on track as you save for special purchases."
           : "If your saving targets change, feel free to update your pots."}
       </p>
       <div className="space-y-2">
-        <label className="text-grey-500 text-xs">Pot Name</label>
+        <label className="text-xs text-grey-500">Pot Name</label>
         <input
           onChange={handleChange}
           type="text"
           name="name"
           value={formDetails.name}
           placeholder="$ e.g. Rainy Days"
-          className="w-full rounded-lg border border-solid border-beige-500 bg-white p-3 text-[14px] "
+          className="w-full rounded-lg border border-solid border-beige-500 bg-white p-3 text-[14px]"
         />
       </div>
 
       <div className="space-y-2">
-        <label className="text-grey-500  text-xs">Maximum Spent</label>
+        <label className="text-xs text-grey-500">Maximum Spent</label>
         <input
           onChange={handleChange}
           type="text"
           value={formDetails.target}
           placeholder="$ e.g. 2000"
           name="target"
-          className="w-full rounded-lg border border-solid border-beige-500 bg-white p-3 text-[14px] "
+          className="w-full rounded-lg border border-solid border-beige-500 bg-white p-3 text-[14px]"
         />
       </div>
 
       <div className="space-y-2">
-        <label className="text-grey-500  text-xs"> Theme</label>
+        <label className="text-xs text-grey-500"> Theme</label>
         <DropDown
           options={unUsedThemes}
           isTheme

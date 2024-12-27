@@ -5,6 +5,7 @@ import CustomModal from "../components/ui/CustomModal";
 import PotsForm from "./PotsForm";
 import { useAppDispatch } from "@/lib/hooks";
 import { addMoneyOrWithdrawToBalance } from "@/lib/features/finance/financeSlice";
+import { toast } from "react-toastify";
 
 function Card({ theme = "#dddfee", name, target, total, id }) {
   const percentage = (total / +target) * 100;
@@ -34,19 +35,19 @@ function Card({ theme = "#dddfee", name, target, total, id }) {
   }
 
   return (
-    <div className="bg-white p-6  rounded-xl ">
+    <div className="rounded-xl bg-white p-6">
       <div className="space-y-3">
         {/* ======================================================== */}
         <div className="flex justify-between">
-          <div className="flex gap-4 items-center">
+          <div className="flex items-center gap-4">
             <div
-              className="w-4 h-4 rounded-full "
+              className="h-4 w-4 rounded-full"
               style={{ backgroundColor: theme }}
             ></div>
             <h1 className="text-[20px] font-bold text-grey-900">{name}</h1>
           </div>
-          <div className="relative ">
-            <div className=" absolute  top-0 right-0 ">
+          <div className="relative">
+            <div className="absolute right-0 top-0">
               <CustomDropdown
                 className="ml-auto"
                 onChange={handleDropdown}
@@ -63,40 +64,40 @@ function Card({ theme = "#dddfee", name, target, total, id }) {
           </div>
         </div>
         {/* ================================================== */}
-        <div className="flex justify-between items-center">
-          <p className="text-grey-500 text-sm">Total Saved</p>
-          <p className="text-grey-900 text-[20px] font-bold">$ {total}.00</p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-grey-500">Total Saved</p>
+          <p className="text-[20px] font-bold text-grey-900">$ {total}.00</p>
         </div>
         {/* ================================================== */}
         <div
-          className="flex w-full h-4 bg-beige-100 rounded-full overflow-hidden "
+          className="flex h-4 w-full overflow-hidden rounded-full bg-beige-100"
           role="progressbar"
           aria-valuenow="25"
           aria-valuemin="0"
           aria-valuemax="100"
         >
           <div
-            className="flex flex-col justify-center rounded-full overflow-hidden text-xs text-white text-center whitespace-nowrap transition duration-500"
+            className="flex flex-col justify-center overflow-hidden whitespace-nowrap rounded-full text-center text-xs text-white transition duration-500"
             style={{ width: `${percentage}%`, backgroundColor: theme }}
           ></div>
         </div>
         {/* ================================================== */}
 
-        <div className="flex justify-between items-center text-xs text-grey-500">
+        <div className="flex items-center justify-between text-xs text-grey-500">
           <p className="font-semibold">{percentage.toFixed(2)}%</p>
           <p>Target of ${target}</p>
         </div>
         {/* ================================================== */}
 
-        <div className="flex gap-4 mt-4 w-full  ">
+        <div className="mt-4 flex w-full gap-4">
           <Button
-            className="bg-beige-100  text-grey-900 shadow-customBoxShadow text-xs flex-1"
+            className="flex-1 bg-beige-100 text-xs text-grey-900 shadow-customBoxShadow"
             onClick={() => handleButton("add")}
           >
             Add Money
           </Button>
           <Button
-            className="bg-beige-100 text-grey-900 shadow-customBoxShadow text-xs flex-1"
+            className="flex-1 bg-beige-100 text-xs text-grey-900 shadow-customBoxShadow"
             onClick={() => handleButton("withdraw")}
           >
             Withdraw
@@ -115,19 +116,19 @@ function Card({ theme = "#dddfee", name, target, total, id }) {
         }
       >
         <div className="space-y-2">
-          <p className="text-grey-500 text-xs">
+          <p className="text-xs text-grey-500">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
             commodi dolorum placeat nostrum nobis facilis fuga amet quos dolore
             quod!
           </p>
-          <div className="flex justify-between items-center">
-            <p className="text-grey-500 text-xs">New Amount</p>
-            <p className="text-grey-900 text-[20px] font-bold">
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-grey-500">New Amount</p>
+            <p className="text-[20px] font-bold text-grey-900">
               ${selectedButton === "add" ? +total + +amount : +total - +amount}
             </p>
           </div>
           <div className="space-y-2">
-            <label className="text-grey-500  text-xs">
+            <label className="text-xs text-grey-500">
               Amount to {selectedButton === "add" ? "Add" : "Withdraw"}
             </label>
             <input
@@ -136,7 +137,7 @@ function Card({ theme = "#dddfee", name, target, total, id }) {
               name="amount"
               onChange={(e) => setAmount(e.target.value)}
               placeholder="$ e.g. 2000"
-              className="w-full rounded-lg border border-solid border-beige-500 bg-white p-2 text-[14px] "
+              className="w-full rounded-lg border border-solid border-beige-500 bg-white p-2 text-[14px]"
             />
           </div>
           <Button
@@ -147,7 +148,7 @@ function Card({ theme = "#dddfee", name, target, total, id }) {
                   type: selectedButton,
                   amount,
                   id,
-                })
+                }),
               );
               setModalVisible(false);
             }}
@@ -172,12 +173,15 @@ function Card({ theme = "#dddfee", name, target, total, id }) {
             </p>
             <Button
               className="bg-customRed text-xs text-white"
-              onClick={() => dispatch(deleteBudgetCategory(id))}
+              onClick={() => {
+                dispatch(deleteBudgetCategory(id));
+                toast.success("deleted pot successfully");
+              }}
             >
               Yes, Confirmation Deletion
             </Button>
             <Button
-              className="bg-transparent text-grey-500 text-xs"
+              className="bg-transparent text-xs text-grey-500"
               onClick={handlePotClose}
             >
               No,Go Back

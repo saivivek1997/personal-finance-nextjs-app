@@ -3,6 +3,7 @@ import "./globals.css";
 import { Public_Sans } from "next/font/google";
 import StoreProvider from "@/lib/storeProvider";
 import Sidebar from "@/app/components/Sidebar";
+import { ToastContainer, toast } from "react-toastify";
 
 const publicSans = Public_Sans({
   weight: ["400", "700", "500"],
@@ -20,9 +21,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <StoreProvider>
         <body className={`${publicSans.className}`}>
+          <ToastContainer />
           <div className="flex">
             <Sidebar />
-            <div className="flex-1 ">{children}</div>
+            <div className="flex-1">{children}</div>
           </div>
         </body>
       </StoreProvider>

@@ -64,6 +64,7 @@ function DropDown({
             alt="menu-icon"
             width="16"
             height="16"
+            className="h-5 w-5 md:h-auto md:w-auto"
           />
         ) : (
           <>
@@ -82,7 +83,7 @@ function DropDown({
         <div
           className={cn(
             "absolute z-50 w-full rounded-lg bg-white text-[14px] text-grey-900 shadow-customBoxShadow",
-            !isMobileScreen ? "w-full" : "min-w-36",
+            !isMobileScreen ? "w-full" : "right-0 min-w-36",
           )}
         >
           <ul className="max-h-64 divide-y-[1px] divide-grey-100 overflow-auto px-2">

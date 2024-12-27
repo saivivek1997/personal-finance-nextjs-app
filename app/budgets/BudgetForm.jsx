@@ -7,6 +7,7 @@ import {
   editBudgetDataInFinanceData,
 } from "@/lib/features/finance/financeSlice";
 import useUnusedCategories from "@/hooks/useUnusedCategories";
+import { toast } from "react-toastify";
 
 export const themes = [
   { id: 1, theme: "Teal Green", value: "#277C78" },
@@ -63,9 +64,11 @@ function BudgetForm({ isEdit, budgetID, handleClose }) {
               ...formDetails,
               id: crypto.randomUUID(),
             }),
+            toast.success("Added Budget Successfully"),
           );
         } else {
           dispatch(editBudgetDataInFinanceData({ ...formDetails }));
+          toast.success("Edited Budget Successfully");
         }
         handleClose();
       }}

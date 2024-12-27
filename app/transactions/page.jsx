@@ -100,7 +100,7 @@ function Transaction() {
             <DropDown
               options={SORT_ITEMS}
               onChange={setSortOption}
-              isIcon
+              isIcon={isMobileScreen}
               iconPath="/assets/icon-sort-mobile.svg"
             />
           </div>
@@ -112,7 +112,7 @@ function Transaction() {
               options={CategoryDropdownItems()}
               onChange={setSelectedCategory}
               selected={selectedCategory}
-              isIcon
+              isIcon={isMobileScreen}
               iconPath="/assets/icon-filter-mobile.svg"
             />
           </div>
