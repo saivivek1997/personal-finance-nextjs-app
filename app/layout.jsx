@@ -5,6 +5,7 @@ import StoreProvider from "@/lib/storeProvider";
 import Sidebar from "@/app/components/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const publicSans = Public_Sans({
   weight: ["400", "700", "500"],
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
             <Sidebar />
             <div className="flex-1">{children}</div>
             <SpeedInsights />
+            <Analytics />
           </div>
         </body>
       </StoreProvider>
