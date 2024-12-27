@@ -20,7 +20,7 @@ function DropDown({
   const dropDownRef = useRef(null);
   const screenSize = useScreenSize();
 
-  const isMobileScreen = screenSize.width <= 600;
+  const isMobileScreen = screenSize?.width <= 600;
 
   useEffect(() => {
     if (!isEdit) onIntialValue(selectedItem);

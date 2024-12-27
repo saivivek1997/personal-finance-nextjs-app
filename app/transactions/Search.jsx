@@ -6,18 +6,18 @@ import { cn } from "../lib/cn";
 function Search({ onChange, searchInput, placeholder = "Search transcation" }) {
   const screenSize = useScreenSize();
 
-  const isMobileScreen = screenSize.width <= 600;
+  const isMobileScreen = screenSize?.width <= 600;
   return (
-    <div className={cn("relative", !isMobileScreen ? " min-w-80" : "min-w-44")}>
+    <div className={cn("relative", !isMobileScreen ? "min-w-80" : "min-w-44")}>
       <input
         type="text"
         alt="search"
         value={searchInput}
         onChange={onChange}
         placeholder={placeholder}
-        className="bg-white rounded-lg w-full  min-h-[45px] border border-beige-500 border-solid  placeholder:border-beige-500 text-[14px] pl-5"
+        className="min-h-[45px] w-full rounded-lg border border-solid border-beige-500 bg-white pl-5 text-[14px] placeholder:border-beige-500"
       />
-      <div className="absolute right-0 inset-y-0 flex items-center pr-3">
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
         <Image
           src="./assets/icon-search.svg"
           alt="search icon"

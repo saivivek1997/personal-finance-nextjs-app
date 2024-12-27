@@ -25,8 +25,10 @@ function Transaction() {
   const [searchParams, setSearchParams] = useState(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setSearchParams(params.get("category"));
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      setSearchParams(params.get("category"));
+    }
   }, []);
 
   const filteredData = useMemo(() => {
@@ -86,7 +88,7 @@ function Transaction() {
 
   const screenSize = useScreenSize();
 
-  const isMobileScreen = screenSize.width <= 600;
+  const isMobileScreen = screenSize?.width <= 600;
 
   return (
     <div className="mb-6 rounded-xl bg-white p-8 md:mb-0">

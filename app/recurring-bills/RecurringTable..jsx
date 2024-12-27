@@ -24,7 +24,7 @@ function RecurringTable({ recurringBillsData }) {
     // Apply filters
     if (debounceSearchInput) {
       data = data.filter((trans) =>
-        trans.name.toLowerCase().includes(debounceSearchInput.toLowerCase())
+        trans.name.toLowerCase().includes(debounceSearchInput.toLowerCase()),
       );
     }
     // Apply sorting
@@ -60,11 +60,11 @@ function RecurringTable({ recurringBillsData }) {
 
   const screenSize = useScreenSize();
 
-  const isMobileScreen = screenSize.width <= 600;
+  const isMobileScreen = screenSize?.width <= 600;
 
   return (
-    <div className="bg-white rounded-xl min-h-screen p-8 ">
-      <div className="flex justify-between items-center mb-5">
+    <div className="min-h-screen rounded-xl bg-white p-8">
+      <div className="mb-5 flex items-center justify-between">
         <Search
           searchInput={searchInput}
           onChange={handleSearch}
@@ -72,9 +72,9 @@ function RecurringTable({ recurringBillsData }) {
         />
         <div className="flex gap-4">
           {/* //repeat */}
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-3">
             {!isMobileScreen && (
-              <p className="text-[14px] text-grey-500 font-[400]">Sort By</p>
+              <p className="text-[14px] font-[400] text-grey-500">Sort By</p>
             )}
             <DropDown
               options={SORT_ITEMS}
@@ -94,7 +94,7 @@ function RecurringTable({ recurringBillsData }) {
               isRecurring
             />
           </div>
-          <div className=" block md:hidden ">
+          <div className="block md:hidden">
             {currentPageData.map((data, index) => (
               <MobileTransactionTable
                 key={`${data.name}-${index}`}
