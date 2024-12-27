@@ -2,18 +2,24 @@ import React from "react";
 import Image from "next/image";
 
 export default function CustomModal({ isVisible, onClose, title, children }) {
+  React.useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isVisible]);
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-      <div
-        className="absolute inset-0"
-        onClick={onClose} // Close modal on clicking the background
-      ></div>
-      {/* Modal Content */}
-      <div className="bg-white rounded-lg shadow-customBoxShadow max-w-sm md:max-w-md w-full z-10 ">
-        {/* Header */}
-        <div className="flex justify-between items-center pt-4 pb-2 px-6  ">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-3">
+      <div className="absolute inset-0" onClick={onClose}></div>
+      <div className="z-10 min-h-fit w-full max-w-sm overflow-y-auto rounded-lg bg-white shadow-customBoxShadow md:max-w-md">
+        <div className="flex items-center justify-between px-6 pb-2 pt-4">
           <h2 className="text-xl font-semibold">{title}</h2>
           <button
             onClick={onClose}
@@ -27,7 +33,6 @@ export default function CustomModal({ isVisible, onClose, title, children }) {
             />
           </button>
         </div>
-        {/* Body */}
         <div className="p-4">{children}</div>
       </div>
     </div>

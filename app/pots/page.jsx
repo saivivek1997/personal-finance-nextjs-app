@@ -15,18 +15,18 @@ function PotsPage() {
   }
 
   return (
-    <div className="bg-beige-100 p-4 min-h-screen ">
-      <div className="flex justify-between items-center mb-2">
+    <div className="mb-12 min-h-screen bg-beige-100 p-4 md:mb-0">
+      <div className="mb-2 flex items-center justify-between">
         <h1>Pots</h1>
         <Button
-          className="disabled:opacity-20 disabled:cursor-not-allowed disabled:pointer-events-none"
+          className="disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-20"
           onClick={() => setModalVisible(true)}
         >
           {" "}
           Add New Pot
         </Button>
       </div>
-      <div className="grid grid-cols-1  md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {financeData.pots.map((pot) => (
           <Card key={pot.id} {...pot} />
         ))}

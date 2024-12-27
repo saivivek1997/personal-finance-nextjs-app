@@ -20,23 +20,23 @@ function BudgetPage() {
   }
 
   return (
-    <div className="bg-beige-100 p-4 md:p-9">
-      <div className="flex justify-between items-center mb-3">
+    <div className="mb-6 bg-beige-100 p-4 md:mb-0 md:p-9">
+      <div className="mb-3 flex items-center justify-between">
         <h1>Budgets</h1>
         <Button
           onClick={() => setModalVisible(true)}
           disabled={unUsedCategories.length === 0}
-          className="disabled:opacity-20 disabled:cursor-not-allowed disabled:pointer-events-none"
+          className="disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-20"
         >
           {" "}
           Add New Budget
         </Button>
       </div>
       {/*==================================================================*/}
-      <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <div className="rounded-xl bg-white p-8 w-full space-y-4">
-            <div className="flex   justify-center mt-12">
+          <div className="w-full space-y-4 rounded-xl bg-white p-8">
+            <div className="mt-12 flex justify-center">
               <DoughnutChart />
             </div>
             <div className="divide-y-[1px] divide-beige-100">

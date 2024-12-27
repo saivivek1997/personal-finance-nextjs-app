@@ -14,7 +14,7 @@ function Home() {
   const { financeData } = useAppSelector((state) => state.finance);
   const totalPotAmount = useMemo(
     () => financeData.pots.reduce((acc, curr) => acc + curr.total, 0),
-    [financeData]
+    [financeData],
   );
   const {
     recurringTotalCounts: { paid, upcoming, dueSoon },
@@ -25,40 +25,40 @@ function Home() {
 
   useEffect(() => {
     financeData.budgets.forEach(({ id, category, maximum, theme }) =>
-      dispatch(setBudgetData({ id, category, maximum, theme }))
+      dispatch(setBudgetData({ id, category, maximum, theme })),
     );
   }, []);
 
   return (
-    <div className="bg-beige-100 min-h-screen p-4 ">
-      <h1 className="text-grey-900 text-base mb-2 font-bold">Overview</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
-        <div className="bg-grey-900 text-white rounded-xl p-4 space-y-2">
+    <div className="mb-12 min-h-screen bg-beige-100 p-4 md:mb-0">
+      <h1 className="mb-2 text-base font-bold text-grey-900">Overview</h1>
+      <div className="mb-3 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="space-y-2 rounded-xl bg-grey-900 p-4 text-white">
           <p className="text-[14px] font-[400]">Current Balance</p>
-          <p className="font-bold text-3xl">${financeData.balance.current}</p>
+          <p className="text-3xl font-bold">${financeData.balance.current}</p>
         </div>
-        <div className="bg-white  rounded-xl p-4 space-y-2">
+        <div className="space-y-2 rounded-xl bg-white p-4">
           <p className="text-[14px] font-[400] text-grey-500">
             Current Balance
           </p>
-          <p className="font-bold text-3xl">${financeData.balance.income}</p>
+          <p className="text-3xl font-bold">${financeData.balance.income}</p>
         </div>
-        <div className="bg-white  rounded-xl p-4 space-y-2">
+        <div className="space-y-2 rounded-xl bg-white p-4">
           <p className="text-[14px] font-[400]">Current Balance</p>
-          <p className="font-bold text-3xl text-grey-900">
+          <p className="text-3xl font-bold text-grey-900">
             ${financeData.balance.expenses}
           </p>
         </div>
       </div>
       {/* =============================== */}
-      <div className="flex  flex-col md:flex-row gap-2">
-        <section className="space-y-2 flex-1 mb-3 ">
-          <div className="bg-white rounded-xl p-4 space-y-2 mb-3">
+      <div className="flex flex-col gap-2 md:flex-row">
+        <section className="mb-3 flex-1 space-y-2">
+          <div className="mb-3 space-y-2 rounded-xl bg-white p-4">
             <div className="flex justify-between">
-              <h1 className="font-bold text-[20px]">Pots</h1>
-              <div className="flex gap-2 items-center ">
+              <h1 className="text-[20px] font-bold">Pots</h1>
+              <div className="flex items-center gap-2">
                 <p
-                  className="text-[14px] text-grey-500 cursor-pointer"
+                  className="cursor-pointer text-[14px] text-grey-500"
                   onClick={() => router.push("/pots")}
                 >
                   See Details
@@ -72,9 +72,9 @@ function Home() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-8 ">
-              <div className="bg-beige-100 rounded-xl p-4 min-w-48">
-                <div className="flex gap-2 items-center ">
+            <div className="flex flex-col gap-8 md:flex-row">
+              <div className="min-w-48 rounded-xl bg-beige-100 p-4">
+                <div className="flex items-center gap-2">
                   <Image
                     src="/assets/icon-pot.svg"
                     alt="pot-icon"
@@ -83,19 +83,19 @@ function Home() {
                   />
                   <div className="space-y-1">
                     <p className="text-[14px] text-grey-500">Total Saved </p>
-                    <p className="text-grey-900 text-2xl font-bold">
+                    <p className="text-2xl font-bold text-grey-900">
                       $ {totalPotAmount}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 flex-1">
+              <div className="grid flex-1 grid-cols-2 gap-3">
                 {financeData.pots.map((pot) => (
                   <div className="flex gap-2" key={pot.id}>
                     <div
                       style={{ background: pot.theme }}
-                      className=" w-1 rounded-lg"
+                      className="w-1 rounded-lg"
                     ></div>
                     <div>
                       <p className="text-xs text-grey-500">{pot.name}</p>
@@ -109,14 +109,14 @@ function Home() {
             </div>
           </div>
           {/* =============================== */}
-          <div className="rounded-xl bg-white px-4 py-4 mb-3">
-            <div className="flex justify-between items-center mb-2">
-              <h1 className="text-base text-grey-900 font-bold">
+          <div className="mb-3 rounded-xl bg-white px-4 py-4">
+            <div className="mb-2 flex items-center justify-between">
+              <h1 className="text-base font-bold text-grey-900">
                 Transactions
               </h1>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 <p
-                  className="text-grey-500 text-[14px] cursor-pointer"
+                  className="cursor-pointer text-[14px] text-grey-500"
                   onClick={() => router.push(`/transactions`)}
                 >
                   View All
@@ -130,12 +130,12 @@ function Home() {
               </div>
             </div>
 
-            <div className="divide-y-[1px] divide-grey-500 divide-opacity-15 space-y-2 ">
+            <div className="space-y-2 divide-y-[1px] divide-grey-500 divide-opacity-15">
               {financeData.transactions
                 .slice(0, 5)
                 .map(({ name, avatar, amount, date }, index) => (
                   <div className="flex justify-between p-2" key={index}>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                       <Avatar img={avatar} />
                       <p>{name}</p>
                     </div>
@@ -156,14 +156,14 @@ function Home() {
 
         {/* ======================================================== */}
         <section className="flex-1">
-          <div className="rounded-xl bg-white px-4 py-4  mb-3">
+          <div className="mb-3 rounded-xl bg-white px-4 py-4">
             <div className="flex justify-between">
-              <h1 className="font-bold text-[20px]">Budgets</h1>
+              <h1 className="text-[20px] font-bold">Budgets</h1>
               <div
-                className="flex gap-2 items-center "
+                className="flex items-center gap-2"
                 onClick={() => router.push("/budgets")}
               >
-                <p className="text-[14px] text-grey-500 cursor-pointer">
+                <p className="cursor-pointer text-[14px] text-grey-500">
                   See Details
                 </p>
                 <Image
@@ -174,14 +174,14 @@ function Home() {
                 />
               </div>
             </div>
-            <div className="flex  flex-col md:flex-row justify-center mt-12 items-center">
+            <div className="mt-12 flex flex-col items-center justify-center md:flex-row">
               <DoughnutChart />
-              <div className="grid grid-cols-2  mt-4 gap-4 md:flex md:flex-col md:gap-2 ml-4">
+              <div className="ml-4 mt-4 grid grid-cols-2 gap-4 md:flex md:flex-col md:gap-2">
                 {financeData.budgets.map((budget) => (
                   <div className="flex gap-2" key={budget.id}>
                     <div
                       style={{ background: budget.theme }}
-                      className=" w-1 rounded-lg"
+                      className="w-1 rounded-lg"
                     ></div>
                     <div>
                       <p className="text-xs text-grey-500">{budget.category}</p>
@@ -195,14 +195,14 @@ function Home() {
             </div>
           </div>
 
-          <div className="rounded-xl bg-white px-4 py-4 ">
-            <div className="flex justify-between items-center mb-2">
-              <h1 className="font-bold text-[20px]">RecurringBills</h1>
+          <div className="rounded-xl bg-white px-4 py-4">
+            <div className="mb-2 flex items-center justify-between">
+              <h1 className="text-[20px] font-bold">RecurringBills</h1>
               <div
-                className="flex gap-2 items-center cursor-pointer "
+                className="flex cursor-pointer items-center gap-2"
                 onClick={() => router.push("/recurring-bills")}
               >
-                <p className="text-[14px] text-grey-500 ">See Details</p>
+                <p className="text-[14px] text-grey-500">See Details</p>
                 <Image
                   src="/assets/icon-caret-right.svg"
                   alt="right-caret"
@@ -212,26 +212,26 @@ function Home() {
               </div>
             </div>
             <div className="space-y-3">
-              <div className="bg-beige-100 border-l-4 rounded-lg border-customGreen">
-                <div className="flex justify-between p-3 items-center">
+              <div className="rounded-lg border-l-4 border-customGreen bg-beige-100">
+                <div className="flex items-center justify-between p-3">
                   <p className="text--grey-500 text-[14px]">Paid Bills</p>
-                  <p className="text-grey-900 text-[14px] font-bold">
+                  <p className="text-[14px] font-bold text-grey-900">
                     ${paid.toFixed(2)}
                   </p>
                 </div>
               </div>
-              <div className="bg-beige-100 border-l-4 rounded-lg border-[#F2CDAC]">
-                <div className="flex justify-between p-3 items-center">
+              <div className="rounded-lg border-l-4 border-[#F2CDAC] bg-beige-100">
+                <div className="flex items-center justify-between p-3">
                   <p className="text--grey-500 text-[14px]">Total Upcoming</p>
-                  <p className="text-grey-900 text-[14px] font-bold">
+                  <p className="text-[14px] font-bold text-grey-900">
                     ${upcoming.toFixed(2)}
                   </p>
                 </div>
               </div>
-              <div className="border-[#82C9D7] bg-beige-100 border-l-4 rounded-lg">
-                <div className="flex justify-between p-3 items-center">
+              <div className="rounded-lg border-l-4 border-[#82C9D7] bg-beige-100">
+                <div className="flex items-center justify-between p-3">
                   <p className="text--grey-500 text-[14px]">Due Soon</p>
-                  <p className="text-grey-900 text-[14px] font-bold">
+                  <p className="text-[14px] font-bold text-grey-900">
                     ${dueSoon.toFixed(2)}
                   </p>
                 </div>

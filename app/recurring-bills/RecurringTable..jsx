@@ -6,6 +6,8 @@ import useTransactionHook from "@/hooks/useTransactionHook";
 import { SORT_ITEMS, SORT_OPTIONS } from "../transactions/CONSTANTS";
 import Search from "../transactions/Search";
 import DropDown from "../components/ui/CustomDropdown";
+import MobileTransactionTable from "../transactions/MobileTransactionTable";
+import useScreenSize from "@/hooks/useScreenSize";
 
 function RecurringTable({ recurringBillsData }) {
   const [searchInput, setSearchInput] = useState("");
@@ -56,6 +58,10 @@ function RecurringTable({ recurringBillsData }) {
 
   const handleSearch = (event) => setSearchInput(event.target.value);
 
+  const screenSize = useScreenSize();
+
+  const isMobileScreen = screenSize.width <= 600;
+
   return (
     <div className="bg-white rounded-xl min-h-screen p-8 ">
       <div className="flex justify-between items-center mb-5">
@@ -67,18 +73,36 @@ function RecurringTable({ recurringBillsData }) {
         <div className="flex gap-4">
           {/* //repeat */}
           <div className="flex gap-3 items-center">
-            <p className="text-[14px] text-grey-500 font-[400]">Sort By</p>
-            <DropDown options={SORT_ITEMS} onChange={setSortOption} />
+            {!isMobileScreen && (
+              <p className="text-[14px] text-grey-500 font-[400]">Sort By</p>
+            )}
+            <DropDown
+              options={SORT_ITEMS}
+              onChange={setSortOption}
+              isIcon
+              iconPath="/assets/icon-sort-mobile.svg"
+            />
           </div>
         </div>
       </div>
       {currentPageData.length > 0 ? (
         <>
-          <TransactionTable
-            transactions={currentPageData}
-            TABLE_HEADERS={TABLE_HEADERS}
-            isRecurring
-          />
+          <div className="hidden md:block">
+            <TransactionTable
+              transactions={currentPageData}
+              TABLE_HEADERS={TABLE_HEADERS}
+              isRecurring
+            />
+          </div>
+          <div className=" block md:hidden ">
+            {currentPageData.map((data, index) => (
+              <MobileTransactionTable
+                key={`${data.name}-${index}`}
+                {...data}
+                isRecurring
+              />
+            ))}
+          </div>
           <Pagination
             financeDataLength={filteredData.length}
             onPaginationChange={handlePageChange}

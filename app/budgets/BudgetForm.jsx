@@ -29,7 +29,7 @@ function BudgetForm({ isEdit, budgetID, handleClose }) {
   const { financeData } = useAppSelector((state) => state.finance);
 
   const budgetObj = financeData.budgets.find(
-    (budget) => budget.id === budgetID
+    (budget) => budget.id === budgetID,
   );
   const {
     unUsedCategories,
@@ -46,9 +46,9 @@ function BudgetForm({ isEdit, budgetID, handleClose }) {
       : {
           id: 0,
           category: null,
-          maximum: 0,
+          maximum: "0",
           theme: null,
-        }
+        },
   );
 
   const dispatch = useAppDispatch();
@@ -62,7 +62,7 @@ function BudgetForm({ isEdit, budgetID, handleClose }) {
             addBudgetDataInFinanceData({
               ...formDetails,
               id: crypto.randomUUID(),
-            })
+            }),
           );
         } else {
           dispatch(editBudgetDataInFinanceData({ ...formDetails }));
@@ -71,12 +71,12 @@ function BudgetForm({ isEdit, budgetID, handleClose }) {
       }}
       className="space-y-3"
     >
-      <p className="text-grey-500 text-[14px]">
+      <p className="text-[14px] text-grey-500">
         Choose a category to set a spending budget. These categories can help
         you monitor spending.
       </p>
       <div className="space-y-2">
-        <label className="text-grey-500 text-xs">Category</label>
+        <label className="text-xs text-grey-500">Category</label>
         <DropDown
           options={unUsedCategories}
           onChange={handleCategoryChange}
@@ -87,18 +87,18 @@ function BudgetForm({ isEdit, budgetID, handleClose }) {
       </div>
 
       <div className="space-y-2">
-        <label className="text-grey-500  text-xs">Maximum Spent</label>
+        <label className="text-xs text-grey-500">Maximum Spent</label>
         <input
           onChange={handleChange}
           type="text"
           value={formDetails.maximum.toString()}
           placeholder="$ e.g. 2000"
-          className="w-full rounded-lg border border-solid border-beige-500 bg-white p-3 text-[14px] "
+          className="w-full rounded-lg border border-solid border-beige-500 bg-white p-3 text-[14px]"
         />
       </div>
 
       <div className="space-y-2">
-        <label className="text-grey-500  text-xs"> Theme</label>
+        <label className="text-xs text-grey-500"> Theme</label>
         <DropDown
           options={unUsedThemes}
           isTheme

@@ -1,9 +1,14 @@
+import useScreenSize from "@/hooks/useScreenSize";
 import Image from "next/image";
 import React from "react";
+import { cn } from "../lib/cn";
 
 function Search({ onChange, searchInput, placeholder = "Search transcation" }) {
+  const screenSize = useScreenSize();
+
+  const isMobileScreen = screenSize.width <= 600;
   return (
-    <div className="relative min-w-80">
+    <div className={cn("relative", !isMobileScreen ? " min-w-80" : "min-w-44")}>
       <input
         type="text"
         alt="search"

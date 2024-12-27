@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState, Suspense } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { financeData } from "@/data/data";
 import Search from "./Search";
 import DropDown from "../components/ui/CustomDropdown";
@@ -14,6 +14,8 @@ import {
 } from "./CONSTANTS.js";
 import useDebounce from "@/hooks/useDebounce";
 import useTransactionHook from "@/hooks/useTransactionHook";
+import MobileTransactionTable from "./MobileTransactionTable";
+import useScreenSize from "@/hooks/useScreenSize";
 
 function Transaction() {
   const [searchInput, setSearchInput] = useState("");
@@ -33,7 +35,7 @@ function Transaction() {
     // Apply filters
     if (debounceSearchInput) {
       data = data.filter((trans) =>
-        trans.name.toLowerCase().includes(debounceSearchInput.toLowerCase())
+        trans.name.toLowerCase().includes(debounceSearchInput.toLowerCase()),
       );
     }
 
@@ -82,47 +84,66 @@ function Transaction() {
 
   const handleSearch = (event) => setSearchInput(event.target.value);
 
+  const screenSize = useScreenSize();
+
+  const isMobileScreen = screenSize.width <= 600;
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="rounded-xl bg-white p-8">
-        <div className="flex justify-between items-center mb-5">
-          <Search searchInput={searchInput} onChange={handleSearch} />
-          <div className="flex gap-4">
-            {/* //repeat */}
-            <div className="flex gap-3 items-center">
-              <p className="text-[14px] text-grey-500 font-[400]">Sort By</p>
-              <DropDown options={SORT_ITEMS} onChange={setSortOption} />
-            </div>
-            <div className="flex gap-3 items-center">
-              <p className="text-[14px] text-grey-500 font-[400]">Category</p>
-              <DropDown
-                options={CategoryDropdownItems()}
-                onChange={setSelectedCategory}
-                selected={selectedCategory}
-              />
-            </div>
+    <div className="mb-6 rounded-xl bg-white p-8 md:mb-0">
+      <div className="mb-5 flex items-center justify-between">
+        <Search searchInput={searchInput} onChange={handleSearch} />
+        <div className="flex gap-4">
+          <div className="flex items-center gap-3">
+            {!isMobileScreen && (
+              <p className="text-[14px] font-[400] text-grey-500">Sort By</p>
+            )}
+            <DropDown
+              options={SORT_ITEMS}
+              onChange={setSortOption}
+              isIcon
+              iconPath="/assets/icon-sort-mobile.svg"
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            {!isMobileScreen && (
+              <p className="text-[14px] font-[400] text-grey-500">Category</p>
+            )}
+            <DropDown
+              options={CategoryDropdownItems()}
+              onChange={setSelectedCategory}
+              selected={selectedCategory}
+              isIcon
+              iconPath="/assets/icon-filter-mobile.svg"
+            />
           </div>
         </div>
+      </div>
 
-        {currentPageData.length > 0 ? (
-          <>
+      {currentPageData.length > 0 ? (
+        <>
+          <div className="hidden md:block">
             <TransactionTable
               transactions={currentPageData}
               TABLE_HEADERS={TABLE_HEADERS}
             />
-            <Pagination
-              financeDataLength={filteredData.length}
-              onPaginationChange={handlePageChange}
-              paginationNumber={currentPage}
-              onPreviousChange={handlePreviousPage}
-              onNextChange={handleNextPage}
-            />
-          </>
-        ) : (
-          <p className="text-center text-grey-500">No transactions found</p>
-        )}
-      </div>
-    </Suspense>
+          </div>
+          <div className="block md:hidden">
+            {currentPageData.map((data, index) => (
+              <MobileTransactionTable key={`${data.name}-${index}`} {...data} />
+            ))}
+          </div>
+          <Pagination
+            financeDataLength={filteredData.length}
+            onPaginationChange={handlePageChange}
+            paginationNumber={currentPage}
+            onPreviousChange={handlePreviousPage}
+            onNextChange={handleNextPage}
+          />
+        </>
+      ) : (
+        <p className="text-center text-grey-500">No transactions found</p>
+      )}
+    </div>
   );
 }
 

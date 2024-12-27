@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <StoreProvider>
         <body className={`${publicSans.className}`}>
-          <div className="flex test">
+          <div className="flex">
             <Sidebar />
             <div className="flex-1 ">{children}</div>
           </div>

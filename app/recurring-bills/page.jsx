@@ -9,13 +9,11 @@ function RecurringBillsPage() {
     useRecurringBillsData();
 
   return (
-    <div className="bg-beige-100 min-h-screen p-4 ">
-      <h1 className="text-grey-900  text-3xl font-bold mb-4">
-        Recurring Bills
-      </h1>
-      <div className="grid  grid-cols-[1fr_2fr] gap-6 ">
+    <div className="mb-8 min-h-screen bg-beige-100 p-4 md:mb-0">
+      <h1 className="mb-4 text-3xl font-bold text-grey-900">Recurring Bills</h1>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_2fr]">
         <div className="space-y-6">
-          <div className="bg-grey-900 rounded-xl p-6 min-h-44 flex flex-col justify-between">
+          <div className="flex min-h-44 flex-row items-center gap-5 rounded-xl bg-grey-900 p-2 md:flex-col md:items-start md:justify-between md:p-6">
             <Image
               src="./assets/icon-recurring-bills.svg"
               alt="recurring-icon"
@@ -23,7 +21,7 @@ function RecurringBillsPage() {
               width={20}
             />
             <div className="space-y-1">
-              <p className="text-[14px] text-white font-[400]"> Total Bills</p>
+              <p className="text-[14px] font-[400] text-white"> Total Bills</p>
               <p className="text-3xl font-bold text-white">
                 $
                 {recurringTotalCounts.paid +
@@ -35,8 +33,8 @@ function RecurringBillsPage() {
           <div className="rounded-xl bg-white p-4">
             <h1 className="text-base font-bold text-grey-900"> Summary</h1>
             <div className="divide-y divide-grey-300">
-              <div className="flex justify-between items-center p-3">
-                <p className="text-xs text-grey-500 ">Paid Bills</p>
+              <div className="flex items-center justify-between p-3">
+                <p className="text-xs text-grey-500">Paid Bills</p>
                 <p className="text-xs font-bold">
                   {recurringTotalCounts.paidCount +
                     " (" +
@@ -45,7 +43,7 @@ function RecurringBillsPage() {
                     ")"}
                 </p>
               </div>
-              <div className="flex justify-between items-center p-3">
+              <div className="flex items-center justify-between p-3">
                 <p className="text-xs text-grey-500">Total Upcoming</p>
                 <p className="text-xs font-bold">
                   {recurringTotalCounts.upcomingCount +
@@ -55,7 +53,7 @@ function RecurringBillsPage() {
                     ")"}
                 </p>
               </div>
-              <div className="flex justify-between items-center p-3">
+              <div className="flex items-center justify-between p-3">
                 <p className="text-xs text-customRed">Due Soon</p>
                 <p className="text-xs font-bold text-customRed">
                   {recurringTotalCounts.dueSoonCount +
