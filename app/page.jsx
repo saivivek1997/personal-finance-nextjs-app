@@ -38,13 +38,11 @@ function Home() {
           <p className="text-3xl font-bold">${financeData.balance.current}</p>
         </div>
         <div className="space-y-2 rounded-xl bg-white p-4">
-          <p className="text-[14px] font-[400] text-grey-500">
-            Current Balance
-          </p>
+          <p className="text-[14px] font-[400] text-grey-500">Income</p>
           <p className="text-3xl font-bold">${financeData.balance.income}</p>
         </div>
         <div className="space-y-2 rounded-xl bg-white p-4">
-          <p className="text-[14px] font-[400]">Current Balance</p>
+          <p className="text-[14px] font-[400]">Expenses</p>
           <p className="text-3xl font-bold text-grey-900">
             ${financeData.balance.expenses}
           </p>
