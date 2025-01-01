@@ -129,6 +129,7 @@ function Transaction() {
               TABLE_HEADERS={TABLE_HEADERS}
             />
           </div>
+          
           <div className="block md:hidden">
             {currentPageData.map((data, index) => (
               <MobileTransactionTable key={`${data.name}-${index}`} {...data} />

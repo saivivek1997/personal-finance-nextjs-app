@@ -14,7 +14,7 @@ const DoughnutChart = () => {
     {
       spentMoney: 0,
       maximum: 0,
-    }
+    },
   );
 
   const chartRef = useRef(null);
@@ -75,7 +75,7 @@ const DoughnutChart = () => {
           textAlign: "center",
         }}
       >
-        <h2 className="text-3xl text-grey-900 mb-2 font-bold">${spentMoney}</h2>
+        <h2 className="mb-2 text-3xl font-bold text-grey-900">${spentMoney}</h2>
         <p className="text-base text-grey-500">of ${maximum} limit</p>
       </div>
     </div>

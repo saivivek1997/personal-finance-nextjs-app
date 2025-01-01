@@ -15,6 +15,7 @@ import Button from "../components/ui/Button";
 import { toast } from "react-toastify";
 
 function CategoryDetails({ id, category, maximum, theme }) {
+  console.log("CategoryDetails page loaded");
   const dispatch = useAppDispatch();
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
@@ -23,6 +24,7 @@ function CategoryDetails({ id, category, maximum, theme }) {
   const percentage = budgetData.find((bdgt) => bdgt.id === id)?.percentage;
 
   useEffect(() => {
+    console.log("CategoryDetails useEffect");
     dispatch(setBudgetData({ id, category, maximum, theme }));
   }, [id, category, maximum, theme]);
 
